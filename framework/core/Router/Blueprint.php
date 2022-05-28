@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Brocooly\Router;
 
 use Illuminate\Support\Str;
+use Theme\App;
 use WPEmerge\Routing\RouteBlueprint;
 
 class Blueprint extends RouteBlueprint
@@ -20,7 +21,7 @@ class Blueprint extends RouteBlueprint
 	/**
 	 * Allowed WordPress conditional tags
 	 *
-	 * @var string[]
+	 * @var array
 	 */
 	private array $allowedConditionals = [
 		'is_404',
@@ -55,11 +56,11 @@ class Blueprint extends RouteBlueprint
 			return $this->get()->where( $snake, ...$arguments );
 		}
 
-		throw new \InvalidArgumentException( sprintf( 'Method `%s()` is not allowed WordPress conditional tag', $snake ) );
+		throw new \Exception( sprintf( 'Method `%s()` is not allowed WordPress conditional tag', $snake ) );
 	}
 
 	/**
-	 * Handle ajax requests
+	 * handle ajax requests
 	 *
 	 * @param string $action
 	 * @param string|array $methods
@@ -73,7 +74,7 @@ class Blueprint extends RouteBlueprint
 	}
 
 	/**
-	 * Get simple output
+	 * Output view file
 	 *
 	 * @param array|string $views
 	 * @param array $ctx
@@ -82,5 +83,31 @@ class Blueprint extends RouteBlueprint
 	public function output( array|string $views, array $ctx = [] )
 	{
 		return $this->handle( fn() => output( $views, $ctx ) );
+	}
+
+	/**
+	 * Add redirect
+	 *
+	 * @param string $from
+	 * @param string $to
+	 * @param integer $status
+	 * @return void
+	 */
+	public function redirect(string $from, string $to, int $status = 302)
+	{
+		return $this->get()->url( $from )
+			->handle( fn() => App::redirect()->withStatus( $status )->to( $to ) );
+	}
+
+	/**
+	 * Add permanent redirect
+	 *
+	 * @param string $from
+	 * @param string $to
+	 * @return void
+	 */
+	public function permanentRedirect(string $from, string $to)
+	{
+		return $this->redirect($from, $to, 301);
 	}
 }

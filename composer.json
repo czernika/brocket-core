@@ -11,22 +11,14 @@
 	"require": {
 		"php": "^8.0",
 		"composer/installers": "^1.12",
-		"filp/whoops": "^2.14",
-		"hellonico/twig-dump-extension": "^1.1",
-		"htmlburger/carbon-fields": "^3.3",
-		"htmlburger/wpemerge": "^0.17",
-		"illuminate/collections": "^8.79",
-		"illuminate/filesystem": "^8.79",
-		"illuminate/support": "^8.79",
-		"illuminate/translation": "^8.80",
-		"illuminate/validation": "^8.80",
-		"johnbillion/extended-cpts": "^4.5",
-		"nette/php-generator": "^3.6",
-		"symfony/console": "^6.0",
-		"timber/timber": "^1.19.2",
-		"vlucas/phpdotenv": "^5.3",
-		"webmozart/assert": "^1.10",
-		"myclabs/php-enum": "^1.8"
+		"czernika/brocket-core": "dev-master",
+		"mnsami/composer-custom-directory-installer": "^2.0",
+		"oscarotero/env": "^2.1",
+		"roots/bedrock-autoloader": "^1.0",
+		"roots/bedrock-disallow-indexing": "^2.0",
+		"roots/wordpress": "5.7.5",
+		"roots/wp-config": "1.0.0",
+		"roots/wp-password-bcrypt": "1.1.0"
 	},
 	"autoload": {
 		"psr-4": {
